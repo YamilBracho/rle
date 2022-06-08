@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func runLengthEncoding(input string ) string {
+func encode(input string) string {
 	count := 0
 	var sb strings.Builder
 
@@ -26,21 +26,16 @@ func runLengthEncoding(input string ) string {
 		}
 
 		// a different char was found
-		if count >  1 {
-			sb.WriteString(fmt.Sprintf("%d", count))
-		}
+		sb.WriteString(fmt.Sprintf("%d", count))
 		sb.WriteByte(previous)
 		count = 1
 	}
 
 	// Last char
-	if count > 1 {
-		sb.WriteString(fmt.Sprintf("%d", count))
-	}
+	sb.WriteString(fmt.Sprintf("%d", count))
 	sb.WriteByte(input[len(input)-1])
 
 	return sb.String()
-
 }
 
 func main() {
@@ -48,11 +43,12 @@ func main() {
 		"aaabbcdddd",
 		"BBBBBBBBBBBBNBBBBBBBBBBBBNNNBBBBBBBBBBBBBBBBBBBBBBBBNBBBBBBBBBBBBBB",
 		"abcdefghijklmnopqrstuvwxyz",
+		"AuuBBBCCCCCCcccccCCCCCCCCCA",
 	}
 
 	for _, str := range arr {
 		fmt.Println(str)
-		fmt.Println(runLengthEncoding(str))
+		fmt.Println(encode(str))
 		println("----------------------------------")
 	}
 }
